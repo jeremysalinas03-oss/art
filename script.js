@@ -37,16 +37,25 @@ const storyNodes = [
 
 const loadedImages = storyNodes.map(node => {
   const image = new Image();
-  image.src = node.img;
   image.ready = false;
-  image.onload = () => image.ready = true;
-  image.onerror = () => image.ready = false;
+
+  image.onload = () => {
+    image.ready = true;
+    console.log("LOADED:", node.img);
+  };
+
+  image.onerror = () => {
+    image.ready = false;
+    console.log("FAILED:", node.img);
+  };
+
+  image.src = node.img;
   return image;
 });
 
 const nodes = [
   [0.075, 0.78], [0.18, 0.68], [0.30, 0.61], [0.42, 0.57], [0.51, 0.48],
-  [0.62, 0.43], [0.72, 0.34], [0.81, 0.27], [0.90, 0.23], [0.965, 0.21]
+  [0.62, 0.43], [0.72, 0.34], [0.81, 0.27], [0.90, 0.23], [0.93, 0.21]
 ];
 
 function resize() {
